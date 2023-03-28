@@ -11,11 +11,12 @@
 
   <div class="keys">
     <div data-key="65" class="key">
+      <!-- 2. 那個自訂的元素 <kbd> 是什麼？ -->
       <kbd>A</kbd>
       <span class="sound">clap</span>
     </div>
     <div data-key="83" class="key">
-      <kbd>S</kbd>
+      <kbd>S</kbd> 
       <span class="sound">hihat</span>
     </div>
     <div data-key="68" class="key">
@@ -59,7 +60,24 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  function playSound(e){
+    console.log(e.keyCode);
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if(!audio) return; // stop the function from running all together
+    audio.currentTime = 0; // rewind to the start
+    audio.play()
+    key.classList.add('playing');
+  }
+  function removeTransition(e) {
+    if(e.propertyName !== 'transform') return; // skip it if it's not a transform
+    console.log(e.propertyName);
+    this.classList.remove('playing'); /* Q2. this 的部分，說是 got called against it? */
+  }
 
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound); /* Q1. 為什麼不能 addEventListener.keydown? */
 </script>
 
 
