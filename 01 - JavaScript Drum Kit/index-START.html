@@ -72,12 +72,12 @@
   function removeTransition(e) {
     if(e.propertyName !== 'transform') return; // skip it if it's not a transform
     console.log(e.propertyName);
-    this.classList.remove('playing'); /* Q2. this 的部分，說是 got called against it? */
+    this.classList.remove('playing'); /* 'this' is always equal to whatever got called against it */
   }
 
   const keys = document.querySelectorAll('.key');
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound); /* Q1. 為什麼不能 addEventListener.keydown? */
+  window.addEventListener('keydown', playSound);
 </script>
 
 
