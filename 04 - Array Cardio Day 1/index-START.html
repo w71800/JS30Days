@@ -38,29 +38,70 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const r1 = inventors.filter( inventor =>{
+        return inventor.year >= 1500 && inventor.year < 1600
+      }
+    )
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const r2 = inventors.map( inventor => {
+      return `${inventor.first} ${inventor.last}`
+    })
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const r3 = inventors.sort( (a, b) => {
+      if(a.year - b.year > 0) return 1
+      else return -1
+    })
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const r4 = inventors.reduce( (total, inventor) => {
+      let age = inventor.passed - inventor.year
+      return total + age
+    }, 0)
+
+
 
     // 5. Sort the inventors by years lived
+    const r5 = inventors.sort( (a, b) => {
+      let ageA = a.passed - a.year
+      let ageB = b.passed - b.year
+      return ageA - ageB
+    })
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
+    // const category = document.querySelector('.mw-category')
+    // const links = Array.from(category.querySelectorAll('a'))
+    // const de = links
+    //               .map( link => link.textContent)
+    //               .filter( streetName => streetName.includes('de'))
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const r7 = people.sort( (a, b)=>{
+      let [aFirst, aLast] = a.split(",")
+      let [bFirst, bLast] = b.split(",")
+
+      return aLast > bLast? 1 : -1
+    })
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const r8 = data.reduce((counter, item)=>{
+      if(!counter[item]){
+        counter[item] = 0
+      }
 
+      counter[item] += 1
+      return counter
+    },{})
+    console.log(r8);
   </script>
 </body>
 </html>
