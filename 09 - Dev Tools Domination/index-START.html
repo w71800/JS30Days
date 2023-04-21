@@ -10,6 +10,7 @@
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
+    const p = document.querySelector("p")
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
     function makeGreen() {
@@ -19,28 +20,38 @@
     }
 
     // Regular
-
+    console.log("Hello");
     // Interpolated
-
+    console.log("I'm a %s string", "Yeah!"); // 類似 C++ 的控制字元
     // Styled
+    console.log("%c I'm a string", "font-size: 50px; color: red"); // 類似 C++ 的控制字元
 
     // warning!
+    console.warn("OH! There's some trouble!");
 
     // Error :|
-
+    console.error("OH! Shit!");
     // Info
-
+    console.info("there's some info.");
     // Testing
-
+    console.assert(1 == 2, "錯惹"); // 前方回傳 false 的話將會丟出錯誤
     // clearing
 
     // Viewing DOM Elements
-
+    // console.dir(p);
     // Grouping together
-
+    console.group(`${dogs[0].name}`);
+    console.log("你好");
+    console.groupEnd(`${dogs[0].name}`);
+    console.group(`${dogs[1].name}`);
+    console.groupEnd(`${dogs[1].name}`);
     // counting
-
+    console.count("IKA");
+    console.count("IKA");
+    console.count("IKA");
     // timing
+    console.time("test");
+    console.timeEnd("test");
 
   </script>
 </body>
