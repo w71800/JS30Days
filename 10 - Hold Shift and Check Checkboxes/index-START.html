@@ -97,40 +97,26 @@
   </div>
 
 <script>
-  const items = document.querySelectorAll(".item")
-  let isShift = false
-  let tempArr = []
+  const checkboxes = document.querySelectorAll(".item input[type='checkbox']")
+  let lastChecked;
+  function handleCheck(e){
+    let inBetween = false
+    if(e.shiftKey && this.checked) { /* 在該 box 被 checked 且按下 Shift 時*/
 
-  function getData(){
-    if(!isShift) return
-    tempArr.push(this)
-    console.log(tempArr);
-  }
-  function checkAll(){
-    tempArr.forEach( item => {
-      if(!isShift) return
-      let checkbox = item.querySelector("input[type='checkbox']")
-      checkbox.checked = true
-    })
-  }
-
-  items.forEach( item => {
-    item.addEventListener('mouseenter', getData)
-    item.addEventListener('click', checkAll)
-  })
-
-  
-  // Behavior about Shift
-  document.addEventListener('keydown', e => {
-    if (e.key == "Shift") {
-      isShift = true
+      /* 策略：檢索每個 checkbox，看看哪幾個是在我當下點擊的以及 lastChecked 之間，用一個 inBetween 來標記*/
+      checkboxes.forEach( checkbox => { 
+        if(checkbox == lastChecked || this == checkbox ){ /* 如果遍歷到的 checkbox 跟我當下點擊的 this 一樣，或者是跟 lastChecked 一樣，即代表終點與起點 */
+          inBetween = !inBetween
+        }
+        if(inBetween) checkbox.checked = true
+      })
     }
-  })
-  document.addEventListener('keyup', e => {
-    if (e.key == "Shift") {
-      isShift = false
-      tempArr = []
-    }
+
+    lastChecked = this /* 抓到被點擊的那個 checkbox */
+  }
+
+  checkboxes.forEach( checkbox => {
+    checkbox.addEventListener('click', handleCheck)
   })
 </script>
 </body>
