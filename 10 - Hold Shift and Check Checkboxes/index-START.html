@@ -97,6 +97,41 @@
   </div>
 
 <script>
+  const items = document.querySelectorAll(".item")
+  let isShift = false
+  let tempArr = []
+
+  function getData(){
+    if(!isShift) return
+    tempArr.push(this)
+    console.log(tempArr);
+  }
+  function checkAll(){
+    tempArr.forEach( item => {
+      if(!isShift) return
+      let checkbox = item.querySelector("input[type='checkbox']")
+      checkbox.checked = true
+    })
+  }
+
+  items.forEach( item => {
+    item.addEventListener('mouseenter', getData)
+    item.addEventListener('click', checkAll)
+  })
+
+  
+  // Behavior about Shift
+  document.addEventListener('keydown', e => {
+    if (e.key == "Shift") {
+      isShift = true
+    }
+  })
+  document.addEventListener('keyup', e => {
+    if (e.key == "Shift") {
+      isShift = false
+      tempArr = []
+    }
+  })
 </script>
 </body>
 </html>
