@@ -13,7 +13,9 @@
   document.addEventListener('keyup', e => {
     
     arr.push(e.key)
-    arr.splice(-secret.length - 1, arr.length - secret.length)
+    // arr.splice(-secret.length - 1, arr.length - secret.length)
+    let r = arr.splice(0, arr.length - secret.length) /* 另一種寫法 */ 
+    console.log(r);
     if(arr.join('') == secret) {
       console.log("DING!");
     }
