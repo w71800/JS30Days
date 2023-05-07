@@ -59,6 +59,27 @@
       };
     }
 
+    const images = document.querySelectorAll('.slide-in')
+
+    function checkSlide(e){
+      console.log(window.scrollY);
+      images.forEach( image => {
+        // 圖片中間位置的掃描線
+        const slideInAt = window.scrollY + window.innerHeight - image.height/2
+        // 圖片底部確切位置
+        const imageButtom = image.offsetTop + image.height
+        const isHalfShown = slideInAt > image.offsetTop
+        const isNotPast = window.scrollY < imageButtom
+        if(isHalfShown && isNotPast) {
+          image.classList.add('active')
+        } else {
+          image.classList.remove('active')
+        }
+      })
+    }
+
+    document.addEventListener('scroll', debounce(checkSlide, 100)) /* 為了防止效能爆炸而做出的 Debounce */
+
   </script>
 
   <style>
