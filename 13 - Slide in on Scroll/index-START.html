@@ -8,7 +8,11 @@
 <body>
 
   <div class="site-wrap">
-
+    <div class="scanner"></div>
+    <div class="scanner"></div>
+    <div class="scanner"></div>
+    <div class="scanner"></div>
+    <div class="scanner"></div>
     <h1>Slide in on Scroll</h1>
 
     <p>Consectetur adipisicing elit. Tempore tempora rerum, est autem cupiditate, corporis a qui libero ipsum delectus quidem dolor at nulla, adipisci veniam in reiciendis aut asperiores omnis blanditiis quod quas laborum nam! Fuga ad tempora in aspernatur pariaturlores sunt esse magni, ut, dignissimos.</p>
@@ -60,15 +64,18 @@
     }
 
     const images = document.querySelectorAll('.slide-in')
+    const scanners = document.querySelectorAll('.scanner')
 
     function checkSlide(e){
-      console.log(window.scrollY);
-      images.forEach( image => {
-        // 圖片中間位置的掃描線
+      images.forEach( (image, i) => {
+        
+        // 掃描線，露出一半時才掛上 class
         const slideInAt = window.scrollY + window.innerHeight - image.height/2
         // 圖片底部確切位置
         const imageButtom = image.offsetTop + image.height
+        // 掃描線是否通過圖片頂端
         const isHalfShown = slideInAt > image.offsetTop
+        // 視窗最上面是否還在圖片內
         const isNotPast = window.scrollY < imageButtom
         if(isHalfShown && isNotPast) {
           image.classList.add('active')
@@ -137,6 +144,11 @@
     .slide-in.active {
       opacity: 1;
       transform: translateX(0%) scale(1);
+    }
+    .scanner {
+      height: 0;
+      border: 1px solid red;
+      z-index: 100;
     }
 
   </style>
