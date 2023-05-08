@@ -15,6 +15,7 @@
 
     // and we want to make a copy of it.
 
+
     // You might think we can just do something like this:
 
     // however what happens when we update that array?
@@ -28,11 +29,15 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    const team1 = players.slice()
 
     // or create a new array and concat the old one in
+    const team2 = [].concat(players)
 
     // or use the new ES6 Spread
-
+    const team3 = [...players]
+    const team4 = Array.from(players)
+  
     // now when we update it, the original one isn't changed
 
     // The same thing goes for objects, let's say we have a person object
@@ -46,11 +51,23 @@
     // and think we make a copy:
 
     // how do we take a copy instead?
+    const cap2 = Object.assign({ number: 99, age: 12 }, person) /* Object.assign(要被覆寫的 Obj, 來源 Obj, 新添加的屬性) */
 
     // We will hopefully soon see the object ...spread
+    const cap3 = {...person, number: 12}
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
-
+    const wes = {
+      name: 'Wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    };
+    // 但可以用這個方法深拷貝物件，只是不知道對效能的影響如何
+    const wes2 = JSON.parse(JSON.stringify(wes))
+    console.log(wes2);
   </script>
 
 </body>
